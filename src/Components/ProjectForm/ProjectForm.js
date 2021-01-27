@@ -47,6 +47,10 @@ export default function ProjectForm() {
       canBeSubmited++;
     }
 
+    if (jsonData.actualProjects.length === 0) {
+      canBeSubmited++;
+    }
+
     jsonData.actualProjects.forEach((proj) => {
       if (proj.selectedproject === "") {
         canBeSubmited++;
