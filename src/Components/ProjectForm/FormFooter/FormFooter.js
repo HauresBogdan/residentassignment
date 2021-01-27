@@ -1,13 +1,13 @@
 import Style from "./StyledFormFooter";
 
-export default function FormFooter() {
+export default function FormFooter({ cancel, toggle }) {
   return (
     <Style>
       <div className="form-footer">
         <div className="form-footer-container">
-          <button>See Json</button>
+          <button onMouseDown={toggle}>toggle Json</button>
           <div className="footer-buttons">
-            <button>Cancel</button>
+            <button onClick={cancel}>Cancel</button>
             <input type="submit" value="SAVE" />
           </div>
         </div>

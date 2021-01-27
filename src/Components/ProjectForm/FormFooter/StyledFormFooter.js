@@ -8,10 +8,11 @@ export default styled.div`
     bottom: 0px;
     width: 100%;
     left: 0px;
+    z-index: 2;
   }
 
   .form-footer-container {
-    padding-top: 5px;
+    padding: 30px 5% 35px 5%;
     max-width: 500px;
     margin: 0 auto;
   }
