@@ -17,6 +17,12 @@ export default styled.div`
   .added-projects > * {
     margin: 7px 0;
   }
+
+  .added-projects select,
+  .added-projects textarea {
+    width: 100%;
+  }
+
   .details-textarea {
     min-height: 100px;
   }
