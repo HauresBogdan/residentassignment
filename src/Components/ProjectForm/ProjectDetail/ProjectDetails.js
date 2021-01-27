@@ -3,15 +3,7 @@ import closeIcon from "../../../media/close.png";
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function ProjectDetails({
-  projectId,
-  remove,
-  projects,
-  setProjectsArr,
-  projectsArr,
-  setJsonData,
-  submitClicked,
-}) {
+export default function ProjectDetails({ projectId, remove, projects, setProjectsArr, projectsArr, setJsonData, submitClicked }) {
   const [selectedPoject, setSelectedProj] = useState("");
   const [details, setDetails] = useState("");
   const [duration, setDuration] = useState("");
@@ -138,8 +130,7 @@ export default function ProjectDetails({
           ></textarea>
           <p
             className={classNames("error-msg", {
-              "display-none":
-                details !== "" || submitClicked === false || isDetailsFocused,
+              "display-none": details !== "" || submitClicked === false || isDetailsFocused,
             })}
           >
             Add some details
@@ -149,32 +140,27 @@ export default function ProjectDetails({
         <p>Duration</p>
         <div className="duration-inputs">
           <div>
-            <input
-              onFocus={durationFocus}
-              onBlur={durationBlur}
-              type="text"
-              onChange={durationHandle}
-              value={duration}
-            />
+            <input onFocus={durationFocus} onBlur={durationBlur} type="text" onChange={durationHandle} value={duration} />
             <p
               className={classNames("error-msg", {
-                "display-none":
-                  duration !== "" ||
-                  submitClicked === false ||
-                  isDurationFocused,
+                "display-none": duration !== "" || submitClicked === false || isDurationFocused,
               })}
             >
               Set duration
             </p>
             <p
               className={classNames("error-msg", {
-                "display-none":
-                  submitClicked === false ||
-                  isDurationFocused ||
-                  isNaN(duration) === false,
+                "display-none": submitClicked === false || isDurationFocused || isNaN(duration) === false,
               })}
             >
               Must be nr
+            </p>
+            <p
+              className={classNames("error-msg", {
+                "display-none": submitClicked === false || isDurationFocused || duration !== "0",
+              })}
+            >
+              Can't be zero
             </p>
           </div>
 
@@ -184,6 +170,7 @@ export default function ProjectDetails({
                 Select Units
               </option>
               <option>days</option>
+              <option>weeks</option>
               <option>months</option>
               <option>years</option>
             </select>
@@ -196,14 +183,7 @@ export default function ProjectDetails({
             </p>
           </div>
         </div>
-        <img
-          className="close-projects"
-          src={closeIcon}
-          alt="close-projects"
-          onClick={remove}
-          value={projectId}
-          value1={selectedPoject}
-        />
+        <img className="close-projects" src={closeIcon} alt="close-projects" onClick={remove} value={projectId} value1={selectedPoject} />
       </div>
     </Style>
   );
