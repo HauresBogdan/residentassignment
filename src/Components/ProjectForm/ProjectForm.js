@@ -34,8 +34,8 @@ export default function ProjectForm() {
   }
 
   function handleSubmit(e) {
-    e.stopPropagation();
     e.preventDefault();
+    e.stopPropagation();
     setSubmitClicked(true);
 
     let canBeSubmited = 0;
@@ -114,18 +114,14 @@ export default function ProjectForm() {
 
   function removeFromProjects(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projects.filter(
-      (project) => project !== toBeDeleted
-    );
+    const newProjectList = projects.filter((project) => project !== toBeDeleted);
     setProjects(newProjectList);
     setJsonData((prevValues) => ({
       ...prevValues,
       projects: newProjectList,
     }));
 
-    const newProjectDetailList = projectsArr.filter(
-      (project) => project.selectedproject !== toBeDeleted
-    );
+    const newProjectDetailList = projectsArr.filter((project) => project.selectedproject !== toBeDeleted);
     setProjectsArr(newProjectDetailList);
     setJsonData((prevValues) => ({
       ...prevValues,
@@ -163,9 +159,7 @@ export default function ProjectForm() {
 
   function removeFromProjectsSection(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projectsArr.filter(
-      (project) => project.uniqId !== toBeDeleted
-    );
+    const newProjectList = projectsArr.filter((project) => project.uniqId !== toBeDeleted);
     setProjectsArr(newProjectList);
     setJsonData((prevValues) => ({
       ...prevValues,
@@ -202,15 +196,15 @@ export default function ProjectForm() {
             className="name-input"
             type="text"
             name="name"
+            onKeyPress={(e) => {
+              e.key === "Enter" && e.preventDefault();
+            }}
             onChange={handleNameInputChange}
             value={jsonData.name}
           />
           <p
             className={classNames("error-msg", {
-              "display-none":
-                jsonData.name !== "" ||
-                nameInputIsFocused ||
-                submitClicked === false,
+              "display-none": jsonData.name !== "" || nameInputIsFocused || submitClicked === false,
             })}
           >
             Name is requiered
@@ -223,13 +217,7 @@ export default function ProjectForm() {
             {projects.map((project) => (
               <span key={uuid()} className="project-tag">
                 {project}
-                <img
-                  className="close-tag"
-                  src={closeIcon}
-                  alt="close-tag"
-                  onClick={removeFromProjects}
-                  value={project}
-                />
+                <img className="close-tag" src={closeIcon} alt="close-tag" onClick={removeFromProjects} value={project} />
               </span>
             ))}
             <input
@@ -239,6 +227,9 @@ export default function ProjectForm() {
               onChange={handleProjectsInputChange}
               value={projectsInput}
               onKeyDown={addingToProjects}
+              onKeyPress={(e) => {
+                e.key === "Enter" && e.preventDefault();
+              }}
             />
           </div>
         </label>
@@ -252,12 +243,7 @@ export default function ProjectForm() {
         <p>
           Project Details{" "}
           <span>
-            <img
-              className="add-icon"
-              src={closeIcon}
-              alt="add-icon"
-              onClick={addProject}
-            />
+            <img className="add-icon" src={closeIcon} alt="add-icon" onClick={addProject} />
           </span>
         </p>
 
@@ -303,8 +289,7 @@ export default function ProjectForm() {
           {jsonData.actualProjects.map((proj) => (
             <div className="individual-project" key={uuid()}>
               <p>
-                Selected:{" "}
-                <span className="proj-item"> {proj.selectedproject}</span>{" "}
+                Selected: <span className="proj-item"> {proj.selectedproject}</span>{" "}
               </p>
               <p>
                 Details: <span className="proj-item"> {proj.details} </span>{" "}

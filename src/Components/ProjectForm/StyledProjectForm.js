@@ -33,7 +33,7 @@ export default styled.div`
   }
 
   .form-container {
-    padding: 50px 5% 100px 5%;
+    padding: 50px 5% 150px 5%;
     max-width: 500px;
     margin: 100px auto 0 auto;
   }
@@ -58,14 +58,14 @@ export default styled.div`
 
   .json-data {
     margin: 70px auto 0 auto;
-    border: 1px dashed lightgray;
     background-color: white;
     width: 100%;
     position: absolute;
     top: 0;
     z-index: 1;
-    height: auto !important; /* real browsers */
-    min-height: 100%; /* real browsers */
+    height: auto !important;
+    min-height: 100%;
+    padding-bottom: 100px;
   }
 
   .toggle-JSON {

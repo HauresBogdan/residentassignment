@@ -140,7 +140,16 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
         <p>Duration</p>
         <div className="duration-inputs">
           <div>
-            <input onFocus={durationFocus} onBlur={durationBlur} type="text" onChange={durationHandle} value={duration} />
+            <input
+              onFocus={durationFocus}
+              onBlur={durationBlur}
+              type="text"
+              onChange={durationHandle}
+              value={duration}
+              onKeyPress={(e) => {
+                e.key === "Enter" && e.preventDefault();
+              }}
+            />
             <p
               className={classNames("error-msg", {
                 "display-none": duration !== "" || submitClicked === false || isDurationFocused,
