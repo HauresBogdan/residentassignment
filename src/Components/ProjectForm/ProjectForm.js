@@ -114,14 +114,18 @@ export default function ProjectForm() {
 
   function removeFromProjects(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projects.filter((project) => project !== toBeDeleted);
+    const newProjectList = projects.filter(
+      (project) => project !== toBeDeleted
+    );
     setProjects(newProjectList);
     setJsonData((prevValues) => ({
       ...prevValues,
       projects: newProjectList,
     }));
 
-    const newProjectDetailList = projectsArr.filter((project) => project.selectedproject !== toBeDeleted);
+    const newProjectDetailList = projectsArr.filter(
+      (project) => project.selectedproject !== toBeDeleted
+    );
     setProjectsArr(newProjectDetailList);
     setJsonData((prevValues) => ({
       ...prevValues,
@@ -159,7 +163,9 @@ export default function ProjectForm() {
 
   function removeFromProjectsSection(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projectsArr.filter((project) => project.uniqId !== toBeDeleted);
+    const newProjectList = projectsArr.filter(
+      (project) => project.uniqId !== toBeDeleted
+    );
     setProjectsArr(newProjectList);
     setJsonData((prevValues) => ({
       ...prevValues,
@@ -186,6 +192,7 @@ export default function ProjectForm() {
           "display-none": toggleJSON === false,
         })}
         onSubmit={handleSubmit}
+        data-testid="form-test"
       >
         {submit && <h1>ALL GOOD</h1>}
         <label>
@@ -204,7 +211,10 @@ export default function ProjectForm() {
           />
           <p
             className={classNames("error-msg", {
-              "display-none": jsonData.name !== "" || nameInputIsFocused || submitClicked === false,
+              "display-none":
+                jsonData.name !== "" ||
+                nameInputIsFocused ||
+                submitClicked === false,
             })}
           >
             Name is requiered
@@ -217,7 +227,13 @@ export default function ProjectForm() {
             {projects.map((project) => (
               <span key={uuid()} className="project-tag">
                 {project}
-                <img className="close-tag" src={closeIcon} alt="close-tag" onClick={removeFromProjects} value={project} />
+                <img
+                  className="close-tag"
+                  src={closeIcon}
+                  alt="close-tag"
+                  onClick={removeFromProjects}
+                  value={project}
+                />
               </span>
             ))}
             <input
@@ -243,7 +259,12 @@ export default function ProjectForm() {
         <p>
           Project Details{" "}
           <span>
-            <img className="add-icon" src={closeIcon} alt="add-icon" onClick={addProject} />
+            <img
+              className="add-icon"
+              src={closeIcon}
+              alt="add-icon"
+              onClick={addProject}
+            />
           </span>
         </p>
 
@@ -261,7 +282,11 @@ export default function ProjectForm() {
             />
           ))}
         </div>
-        <FormFooter cancel={cancelSubmit} toggle={toggleView} />
+        <FormFooter
+          cancel={cancelSubmit}
+          toggle={toggleView}
+          handleSubmit={handleSubmit}
+        />
       </form>
 
       <div
@@ -289,7 +314,8 @@ export default function ProjectForm() {
           {jsonData.actualProjects.map((proj) => (
             <div className="individual-project" key={uuid()}>
               <p>
-                Selected: <span className="proj-item"> {proj.selectedproject}</span>{" "}
+                Selected:{" "}
+                <span className="proj-item"> {proj.selectedproject}</span>{" "}
               </p>
               <p>
                 Details: <span className="proj-item"> {proj.details} </span>{" "}
@@ -308,7 +334,11 @@ export default function ProjectForm() {
           <br />
           <p>THE JSON String</p>
           <p className="json-string proj-item">{JSON.stringify(jsonData)}</p>
-          <FormFooter cancel={cancelSubmit} toggle={toggleView} />
+          <FormFooter
+            cancel={cancelSubmit}
+            toggle={toggleView}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </Style>
