@@ -3,7 +3,7 @@ import closeIcon from "../../../media/close.png";
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function ProjectDetails({ projectId, remove, projects, setProjectsArr, projectsArr, setJsonData, submitClicked }) {
+export default function ProjectDetails({ projectId, remove, jsonData, setJsonData, submitClicked }) {
   const [selectedPoject, setSelectedProj] = useState("");
   const [details, setDetails] = useState("");
   const [duration, setDuration] = useState("");
@@ -13,7 +13,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
 
   function selectHandle(e) {
     setSelectedProj(e.target.value);
-    const newProjectList = projectsArr.map((project) =>
+    const newProjectList = jsonData.actualProjects.map((project) =>
       project.uniqId !== projectId
         ? project
         : {
@@ -21,7 +21,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
             selectedproject: e.target.value,
           }
     );
-    setProjectsArr(newProjectList);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectList,
@@ -30,7 +30,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
 
   function textareaHandle(e) {
     setDetails(e.target.value);
-    const newProjectList = projectsArr.map((project) =>
+    const newProjectList = jsonData.actualProjects.map((project) =>
       project.uniqId !== projectId
         ? project
         : {
@@ -38,7 +38,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
             details: e.target.value,
           }
     );
-    setProjectsArr(newProjectList);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectList,
@@ -47,7 +47,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
 
   function durationHandle(e) {
     setDuration(e.target.value);
-    const newProjectList = projectsArr.map((project) =>
+    const newProjectList = jsonData.actualProjects.map((project) =>
       project.uniqId !== projectId
         ? project
         : {
@@ -55,7 +55,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
             duration: e.target.value,
           }
     );
-    setProjectsArr(newProjectList);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectList,
@@ -64,7 +64,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
 
   function unitHandling(e) {
     setUnits(e.target.value);
-    const newProjectList = projectsArr.map((project) =>
+    const newProjectList = jsonData.actualProjects.map((project) =>
       project.uniqId !== projectId
         ? project
         : {
@@ -72,7 +72,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
             units: e.target.value,
           }
     );
-    setProjectsArr(newProjectList);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectList,
@@ -104,7 +104,7 @@ export default function ProjectDetails({ projectId, remove, projects, setProject
             <option value="" disabled hidden>
               Select Project
             </option>
-            {projects.map((project) => (
+            {jsonData.projects.map((project) => (
               <option key={project}>{project}</option>
             ))}
           </select>

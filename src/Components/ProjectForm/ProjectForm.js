@@ -7,10 +7,8 @@ import ProjectDetails from "./ProjectDetail/ProjectDetails";
 import FormFooter from "./FormFooter/FormFooter";
 
 export default function ProjectForm() {
-  const [projects, setProjects] = useState([]);
   const [projectsInput, setProjectsInput] = useState("");
   const [errors, setErrors] = useState({ nameInputEr: "", projectInputEr: "" });
-  const [projectsArr, setProjectsArr] = useState([]);
   const [showError, setShowError] = useState(false);
   const [toggleJSON, setToggleJSON] = useState(true);
   const [nameInputIsFocused, setNameInputIsFocused] = useState(false);
@@ -91,7 +89,7 @@ export default function ProjectForm() {
         });
       }
 
-      if (projects.includes(projectsInput)) {
+      if (jsonData.projects.includes(projectsInput)) {
         setShowError(true);
         setTimeout(function () {
           setShowError(false);
@@ -101,7 +99,6 @@ export default function ProjectForm() {
           projectInputEr: "You already added this project",
         });
       } else {
-        setProjects((prevValues) => [...prevValues, projectsInput]);
         setJsonData((prevValues) => ({
           ...prevValues,
           projects: [...jsonData.projects, projectsInput],
@@ -114,19 +111,15 @@ export default function ProjectForm() {
 
   function removeFromProjects(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projects.filter(
-      (project) => project !== toBeDeleted
-    );
-    setProjects(newProjectList);
+    const newProjectList = jsonData.projects.filter((project) => project !== toBeDeleted);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       projects: newProjectList,
     }));
 
-    const newProjectDetailList = projectsArr.filter(
-      (project) => project.selectedproject !== toBeDeleted
-    );
-    setProjectsArr(newProjectDetailList);
+    const newProjectDetailList = jsonData.actualProjects.filter((project) => project.selectedproject !== toBeDeleted);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectDetailList,
@@ -135,16 +128,6 @@ export default function ProjectForm() {
 
   function addProject() {
     const uniqId = uuid();
-    setProjectsArr((prevValues) => [
-      ...prevValues,
-      {
-        selectedproject: "",
-        details: "",
-        duration: "",
-        units: "",
-        uniqId: uniqId,
-      },
-    ]);
 
     setJsonData((prevValues) => ({
       ...prevValues,
@@ -163,10 +146,8 @@ export default function ProjectForm() {
 
   function removeFromProjectsSection(e) {
     const toBeDeleted = e.target.getAttribute("value");
-    const newProjectList = projectsArr.filter(
-      (project) => project.uniqId !== toBeDeleted
-    );
-    setProjectsArr(newProjectList);
+    const newProjectList = jsonData.actualProjects.filter((project) => project.uniqId !== toBeDeleted);
+
     setJsonData((prevValues) => ({
       ...prevValues,
       actualProjects: newProjectList,
@@ -211,10 +192,7 @@ export default function ProjectForm() {
           />
           <p
             className={classNames("error-msg", {
-              "display-none":
-                jsonData.name !== "" ||
-                nameInputIsFocused ||
-                submitClicked === false,
+              "display-none": jsonData.name !== "" || nameInputIsFocused || submitClicked === false,
             })}
           >
             Name is requiered
@@ -224,16 +202,10 @@ export default function ProjectForm() {
           Projects:
           <br />
           <div className="tags-and-proj-input">
-            {projects.map((project) => (
+            {jsonData.projects.map((project) => (
               <span key={uuid()} className="project-tag">
                 {project}
-                <img
-                  className="close-tag"
-                  src={closeIcon}
-                  alt="close-tag"
-                  onClick={removeFromProjects}
-                  value={project}
-                />
+                <img className="close-tag" src={closeIcon} alt="close-tag" onClick={removeFromProjects} value={project} />
               </span>
             ))}
             <input
@@ -259,34 +231,23 @@ export default function ProjectForm() {
         <p>
           Project Details{" "}
           <span>
-            <img
-              className="add-icon"
-              src={closeIcon}
-              alt="add-icon"
-              onClick={addProject}
-            />
+            <img className="add-icon" src={closeIcon} alt="add-icon" onClick={addProject} />
           </span>
         </p>
 
         <div className="projects-section">
-          {projectsArr.map((project) => (
+          {jsonData.actualProjects.map((project) => (
             <ProjectDetails
               key={project.uniqId}
-              projects={projects}
               projectId={project.uniqId}
               remove={removeFromProjectsSection}
-              setProjectsArr={setProjectsArr}
-              projectsArr={projectsArr}
+              jsonData={jsonData}
               setJsonData={setJsonData}
               submitClicked={submitClicked}
             />
           ))}
         </div>
-        <FormFooter
-          cancel={cancelSubmit}
-          toggle={toggleView}
-          handleSubmit={handleSubmit}
-        />
+        <FormFooter cancel={cancelSubmit} toggle={toggleView} handleSubmit={handleSubmit} />
       </form>
 
       <div
@@ -314,8 +275,7 @@ export default function ProjectForm() {
           {jsonData.actualProjects.map((proj) => (
             <div className="individual-project" key={uuid()}>
               <p>
-                Selected:{" "}
-                <span className="proj-item"> {proj.selectedproject}</span>{" "}
+                Selected: <span className="proj-item"> {proj.selectedproject}</span>{" "}
               </p>
               <p>
                 Details: <span className="proj-item"> {proj.details} </span>{" "}
@@ -334,11 +294,7 @@ export default function ProjectForm() {
           <br />
           <p>THE JSON String</p>
           <p className="json-string proj-item">{JSON.stringify(jsonData)}</p>
-          <FormFooter
-            cancel={cancelSubmit}
-            toggle={toggleView}
-            handleSubmit={handleSubmit}
-          />
+          <FormFooter cancel={cancelSubmit} toggle={toggleView} handleSubmit={handleSubmit} />
         </div>
       </div>
     </Style>
