@@ -16,7 +16,7 @@ https://residentassignment.netlify.app/
 ### Remarks
 
 # npm run start
-# npm run tests
+# npm run test
 
 Inputs, textarea, selects validated to pe required/selected.
 Projects can be added while typing on projects input and hitting enter.

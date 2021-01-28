@@ -81,7 +81,7 @@ it("success message should no appear if only the name is added while submitting"
   expect(form.find(".success").exists()).toBeFalsy();
 });
 
-it("Form adds projects correctly", () => {
+it("Form adds projects correctly after entering a project name and pressing enter", () => {
   const wrapper = document.createElement("div");
   ReactDOM.render(<ProjectForm />, wrapper);
   const tagInput = wrapper.querySelector(".tag-input");
