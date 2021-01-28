@@ -18,7 +18,7 @@ https://residentassignment.netlify.app/
 # npm run start
 # npm run tests
 
-Inputs, textarea, selects validated to pe required/selected.
+Inputs, textareas, selects validated to pe required/selected.
 Projects can be added while typing on projects input and hitting enter.
 First, it checks if the project name already exists before adding it.
 If it exists then a message will appear for a short amount of time notifying that you already added this project.
