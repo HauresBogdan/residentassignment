@@ -100,7 +100,7 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
       <div className="added-projects">
         <p>Projects</p>
         <div>
-          <select value={selectedPoject} onChange={selectHandle}>
+          <select value={selectedPoject} onChange={selectHandle} className="project-select">
             <option value="" disabled hidden>
               Select Project
             </option>
@@ -141,6 +141,7 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
         <div className="duration-inputs">
           <div>
             <input
+              className="duration-input"
               onFocus={durationFocus}
               onBlur={durationBlur}
               type="text"
@@ -174,7 +175,7 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
           </div>
 
           <div>
-            <select value={units} onChange={unitHandling}>
+            <select value={units} onChange={unitHandling} className="duration-select">
               <option value="" disabled hidden>
                 Select Units
               </option>
