@@ -194,7 +194,7 @@ export default function ProjectForm() {
         onSubmit={handleSubmit}
         data-testid="form-test"
       >
-        {submit && <h1>ALL GOOD</h1>}
+        {submit && <h1 className="success">ALL GOOD</h1>}
         <label>
           Name:
           <input
