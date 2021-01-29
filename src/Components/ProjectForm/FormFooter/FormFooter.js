@@ -1,5 +1,5 @@
 import Style from "./StyledFormFooter";
-import SubmitButton from "./SubmitButton/SubmitButton";
+import SubmitButton from "./SubmitButton";
 import { CONSTANTS } from "../../../constants/Constants";
 
 export default function FormFooter({ cancel, toggle, handleSubmit }) {

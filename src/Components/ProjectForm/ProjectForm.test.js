@@ -6,7 +6,7 @@ import ProjectForm from "./ProjectForm";
 import { render } from "@testing-library/react";
 import ReactDOM from "react-dom";
 import ReactTestUtils from "react-dom/test-utils";
-import SubmitButton from "./FormFooter/SubmitButton/SubmitButton";
+import SubmitButton from "./FormFooter/SubmitButton";
 
 it("form component can be mounted and form element is found", () => {
   const projectForm = mount(<ProjectForm />);
@@ -126,12 +126,18 @@ it("Form submits with success if corect form data is added, form data is valid a
   expect(wrapper.querySelector(".added-projects")).toBeTruthy();
   const selectProject = wrapper.querySelector(".project-select");
   expect(selectProject).toBeTruthy();
-  ReactTestUtils.Simulate.change(selectProject, { target: { value: "Project X" } });
+  ReactTestUtils.Simulate.change(selectProject, {
+    target: { value: "Project X" },
+  });
   const detailTextarea = wrapper.querySelector(".details-textarea");
   expect(detailTextarea).toBeTruthy();
-  ReactTestUtils.Simulate.change(detailTextarea, { target: { value: "I have been project manager of this project and ..." } });
+  ReactTestUtils.Simulate.change(detailTextarea, {
+    target: { value: "I have been project manager of this project and ..." },
+  });
   expect(selectProject.value).toEqual("Project X");
-  expect(detailTextarea.value).toEqual("I have been project manager of this project and ...");
+  expect(detailTextarea.value).toEqual(
+    "I have been project manager of this project and ..."
+  );
   const durationUnits = wrapper.querySelector(".duration-select");
   expect(durationUnits).toBeTruthy();
   ReactTestUtils.Simulate.change(durationUnits, { target: { value: "years" } });

@@ -1,4 +1,4 @@
-import { CONSTANTS } from "../../../../constants/Constants";
+import { CONSTANTS } from "../../../constants/Constants";
 
 export default function SubmitButton({ handleSubmit }) {
   return (
