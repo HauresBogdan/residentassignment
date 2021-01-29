@@ -42,8 +42,19 @@ export default function ProjectForm() {
     } else setSubmit(false);
   }
 
-  function cancelSubmit() {
-    window.location.reload();
+  function cancelSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setJsonData({
+      name: "",
+      projects: [],
+      actualProjects: [],
+    });
+
+    setProjectsInput("");
+
+    setSubmitClicked(false);
   }
 
   function addingToProjects(e) {

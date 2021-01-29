@@ -1,11 +1,11 @@
 export const CONSTANTS = {
   NAME_INPUT: {
     LABEL: "Name:",
-    REQ_ERROR: "This field is required",
+    REQ_ERROR: "Please enter your name",
   },
   PROJECTS_INPUT: {
     LABEL: "Projects:",
-    REQ_ERROR: "You didn't introduced any project name",
+    REQ_ERROR: "Please enter a project name",
     EXISTS_ERROR: "You already added this project",
   },
   PROJECT_DETAILS: {
@@ -14,16 +14,19 @@ export const CONSTANTS = {
   PROJECT_DETAIL: {
     PROJECT_LABEL: "Projects",
     PROJECT_NAME: "Select Project",
-    PROJECT_REQ_ERROR: "Select a project",
+    PROJECT_REQ_ERROR: "Please select a project",
     DETAILS_LABEL: "Details",
-    DETAILS_REQ_ERROR: " Add some details",
+    DETAILS_REQ_ERROR: "You didn't added any details about this project",
     DURATION_LABEL: "Duration",
     DURATION_INPUT_NAME: "Duration",
-    DURATION_INPUT_REQ_ERROR: "Set duration",
-    DURATION_INPUT_ISNUM_ERROR: "Must be nr",
-    DURATION_INPUT_ZERO_ERROR: "Can't be zero",
+    DURATION_INPUT_REQ_ERROR:
+      "Please enter the time you worked on this project",
+    DURATION_INPUT_ISNUM_ERROR:
+      "The time duration you worked on this project must be a number",
+    DURATION_INPUT_ZERO_ERROR:
+      "The time duration you worked on this project can't be equal to zero",
     SELECT_UNITS_NAME: "Select Units",
-    SELECT_UNITS_REQ_ERROR: "Select time unit",
+    SELECT_UNITS_REQ_ERROR: "Please select time unit for your duration",
     TIME_FRAME_ARRAY: ["days", "weeks", "months", "years", "decades"],
   },
   SUCCESS_MESSAGE: "ALL GOOD",
