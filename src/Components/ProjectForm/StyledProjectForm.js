@@ -50,12 +50,6 @@ export default styled.div`
     display: none;
   }
 
-  .json-container {
-    padding: 50px 5% 100px 5%;
-    max-width: 500px;
-    margin: 100px auto 0 auto;
-  }
-
   .json-data {
     margin: 70px auto 0 auto;
     background-color: white;
@@ -70,20 +64,5 @@ export default styled.div`
 
   .toggle-JSON {
     display: none;
-  }
-
-  .proj-item {
-    color: blue;
-  }
-
-  .json-string {
-    margin-top: 20px;
-    font-size: 11px;
-  }
-
-  .individual-project {
-    padding: 1em;
-    margin: 10px 0;
-    border: 1px dashed gray;
   }
 `;

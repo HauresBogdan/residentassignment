@@ -2,8 +2,15 @@ import Style from "./StyledProjectDetails";
 import closeIcon from "../../../media/close.png";
 import { useState } from "react";
 import classNames from "classnames";
+import { CONSTANTS } from "../../../constants/Constants";
 
-export default function ProjectDetails({ projectId, remove, jsonData, setJsonData, submitClicked }) {
+export default function ProjectDetails({
+  projectId,
+  remove,
+  jsonData,
+  setJsonData,
+  submitClicked,
+}) {
   const [selectedPoject, setSelectedProj] = useState("");
   const [details, setDetails] = useState("");
   const [duration, setDuration] = useState("");
@@ -79,30 +86,18 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
     }));
   }
 
-  function textareaFocus() {
-    setIsDetailsFocused(true);
-  }
-
-  function textareaBlur() {
-    setIsDetailsFocused(false);
-  }
-
-  function durationFocus() {
-    setIsDurationFocused(true);
-  }
-
-  function durationBlur() {
-    setIsDurationFocused(false);
-  }
-
   return (
     <Style>
       <div className="added-projects">
-        <p>Projects</p>
+        <p>{CONSTANTS.PROJECT_DETAIL.PROJECT_LABEL}</p>
         <div>
-          <select value={selectedPoject} onChange={selectHandle} className="project-select">
+          <select
+            value={selectedPoject}
+            onChange={selectHandle}
+            className="project-select"
+          >
             <option value="" disabled hidden>
-              Select Project
+              {CONSTANTS.PROJECT_DETAIL.PROJECT_NAME}
             </option>
             {jsonData.projects.map((project) => (
               <option key={project}>{project}</option>
@@ -113,15 +108,15 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
               "display-none": selectedPoject !== "" || submitClicked === false,
             })}
           >
-            Select a project
+            {CONSTANTS.PROJECT_DETAIL.PROJECT_REQ_ERROR}
           </p>
         </div>
 
-        <p>Details</p>
+        <p>{CONSTANTS.PROJECT_DETAIL.DETAILS_LABEL}</p>
         <div>
           <textarea
-            onFocus={textareaFocus}
-            onBlur={textareaBlur}
+            onFocus={() => setIsDetailsFocused(true)}
+            onBlur={() => setIsDetailsFocused(false)}
             onChange={textareaHandle}
             value={details}
             className="details-textarea"
@@ -130,20 +125,23 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
           ></textarea>
           <p
             className={classNames("error-msg", {
-              "display-none": details !== "" || submitClicked === false || isDetailsFocused,
+              "display-none":
+                details.trim() !== "" ||
+                submitClicked === false ||
+                isDetailsFocused,
             })}
           >
-            Add some details
+            {CONSTANTS.PROJECT_DETAIL.DETAILS_REQ_ERROR}
           </p>
         </div>
 
-        <p>Duration</p>
+        <p>{CONSTANTS.PROJECT_DETAIL.DURATION_LABEL}</p>
         <div className="duration-inputs">
           <div>
             <input
               className="duration-input"
-              onFocus={durationFocus}
-              onBlur={durationBlur}
+              onFocus={() => setIsDurationFocused(true)}
+              onBlur={() => setIsDurationFocused(false)}
               type="text"
               onChange={durationHandle}
               value={duration}
@@ -153,47 +151,66 @@ export default function ProjectDetails({ projectId, remove, jsonData, setJsonDat
             />
             <p
               className={classNames("error-msg", {
-                "display-none": duration !== "" || submitClicked === false || isDurationFocused,
+                "display-none":
+                  duration.trim() !== "" ||
+                  submitClicked === false ||
+                  isDurationFocused,
               })}
             >
-              Set duration
+              {CONSTANTS.PROJECT_DETAIL.DURATION_INPUT_REQ_ERROR}
             </p>
             <p
               className={classNames("error-msg", {
-                "display-none": submitClicked === false || isDurationFocused || isNaN(duration) === false,
+                "display-none":
+                  submitClicked === false ||
+                  isDurationFocused ||
+                  isNaN(duration) === false,
               })}
             >
-              Must be nr
+              {CONSTANTS.PROJECT_DETAIL.DURATION_INPUT_ISNUM_ERROR}
             </p>
             <p
               className={classNames("error-msg", {
-                "display-none": submitClicked === false || isDurationFocused || duration !== "0",
+                "display-none":
+                  submitClicked === false ||
+                  isDurationFocused ||
+                  duration !== "0",
               })}
             >
-              Can't be zero
+              {CONSTANTS.PROJECT_DETAIL.DURATION_INPUT_ZERO_ERROR}
             </p>
           </div>
 
           <div>
-            <select value={units} onChange={unitHandling} className="duration-select">
+            <select
+              value={units}
+              onChange={unitHandling}
+              className="duration-select"
+            >
               <option value="" disabled hidden>
-                Select Units
+                {CONSTANTS.PROJECT_DETAIL.SELECT_UNITS_NAME}
               </option>
-              <option>days</option>
-              <option>weeks</option>
-              <option>months</option>
-              <option>years</option>
+              {CONSTANTS.PROJECT_DETAIL.TIME_FRAME_ARRAY.map((timeFrame) => (
+                <option key={timeFrame}>{timeFrame}</option>
+              ))}
             </select>
             <p
               className={classNames("error-msg", {
                 "display-none": units !== "" || submitClicked === false,
               })}
             >
-              Select time unit
+              {CONSTANTS.PROJECT_DETAIL.SELECT_UNITS_REQ_ERROR}
             </p>
           </div>
         </div>
-        <img className="close-projects" src={closeIcon} alt="close-projects" onClick={remove} value={projectId} value1={selectedPoject} />
+        <img
+          className="close-projects"
+          src={closeIcon}
+          alt="close-projects"
+          onClick={remove}
+          value={projectId}
+          value1={selectedPoject}
+        />
       </div>
     </Style>
   );

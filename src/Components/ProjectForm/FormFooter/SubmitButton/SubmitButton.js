@@ -1,3 +1,5 @@
+import { CONSTANTS } from "../../../../constants/Constants";
+
 export default function SubmitButton({ handleSubmit }) {
   return (
     <button
@@ -6,7 +8,7 @@ export default function SubmitButton({ handleSubmit }) {
       onClick={handleSubmit}
       value="SAVE"
     >
-      SAVE
+      {CONSTANTS.FOOTER_SECTION.SUBMIT_BUTTON_TEXT}
     </button>
   );
 }
